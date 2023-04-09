@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GenyiIdiotMauiApp.View.QuestionEditPage"
+             Title="Редактор вопроса"
+             xmlns:viewmodel="clr-namespace:GenyiIdiotMauiApp.ViewModel"
+             x:DataType="viewmodel:QuestionEditViewModel">
+    
+     <VerticalStackLayout>
+       
+        <Label 
+            Margin="5"
+            Text="Текст вопроса:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Editor 
+            x:Name="questionEditPageTextEditor"
+            Margin="5"
+            Text="{Binding Question.Text}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            HorizontalTextAlignment="Start" 
+            AutoSize="TextChanges" 
+            Keyboard="Text" 
+            MinimumWidthRequest="150" 
+            Placeholder="Введите текст вопроса" 
+            PlaceholderColor="#B8AEAE" />
+
+        <Label 
+            Margin="5"
+            Text="Ответ:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Editor 
+            x:Name="questionEditPageAnswerEditor"
+            Margin="5"
+            Text="{Binding Question.Answer}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            Keyboard="Numeric"
+            MinimumWidthRequest="50" 
+            Placeholder="Введите ответ" 
+            PlaceholderColor="#B8AEAE" />
+
+        <Button 
+            x:Name="saveChangesButton"
+            Margin="5"
+            Text="Сохранить" 
+            Clicked="SaveChangesButton_Clicked"/>
+        <Button 
+            x:Name="deleteQuestionButton"
+            Margin="5"
+            Text="Удалить вопрос" 
+            Clicked="DeleteQuestionButton_Clicked"/>
+
+
+    </VerticalStackLayout>
+    
+</ContentPage>
