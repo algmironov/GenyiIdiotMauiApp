@@ -4,6 +4,7 @@ using GenyiIdiotMauiApp.DataBase;
 using System.Threading;
 using GeniyIdiotMauiApp.Service;
 using Microsoft.Maui.Dispatching;
+using GenyiIdiotMauiApp.Service;
 
 namespace GenyiIdiotMauiApp.View;
 
@@ -21,11 +22,13 @@ public partial class PlayGamePage : ContentPage
     Result result = new();
     Question question;
     IDispatcher dispatcher;
+    ResultService resultService;
     
 
-    public PlayGamePage(IDispatcher dispatcherProvider)
+    public PlayGamePage(IDispatcher dispatcherProvider, ResultService resultService)
 	{
         this.dispatcher = dispatcherProvider;
+        this.resultService = resultService;
 		InitializeComponent();
 		LoadQuestions();
         OnStartGame();
@@ -68,34 +71,16 @@ public partial class PlayGamePage : ContentPage
         if (questionsToAsk.Count > 0)
         {
             ShowQuestion();
-            
         }
         else
         {
             result.Diagnosis = DiagnosisStorage.GetDiagnosisByResult(result.CorrectAnswersCount, questionsCount);
             timer.Stop();
-            AskName();
             questionsToAsk.Clear();
-            if (result.Name != "")
-            {
-                ResultStorage.AddResult(result);
-                EndGame();
-            }
-            else
-            {
-                EndGame();
-            }
+            EndGame();
         }
     }
 
-    async void AskName()
-    {
-        var name = await DisplayPromptAsync("Игра окончена!", $"Вы ответили на {result.CorrectAnswersCount} из {questionsCount} вопросов.\nВаш диагноз: {result.Diagnosis}", "Сохранить результат", "Не сохранять", "Введите имя", 20, default, "");
-        if (name != null)
-        {
-            result.Name = name;
-        }
-    }
     private void ResetTimer()
     {
         timer.Stop();
@@ -154,7 +139,7 @@ public partial class PlayGamePage : ContentPage
         //sendAnswerButton.Text = $"Отправить ({timePerQuestion} {secondsSpelling(timePerQuestion)})";
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            sendAnswerButton.Text = $"Ответить ({timePerQuestion} {secondsSpelling(timePerQuestion)})";
+            sendAnswerButton.Text = $"Ответить ({timePerQuestion} {SecondsSpelling(timePerQuestion)})";
         });
         if (timePerQuestion == 0)
         {
@@ -164,7 +149,7 @@ public partial class PlayGamePage : ContentPage
         }
     }
 
-    private string secondsSpelling(int num)
+    private static string SecondsSpelling(int num)
     {
         string seconds = "";
         switch (num)
@@ -192,12 +177,20 @@ public partial class PlayGamePage : ContentPage
 
     private async void EndGame()
     {
+        var name = await DisplayPromptAsync("Игра окончена!", $"Вы ответили на {result.CorrectAnswersCount} из {questionsCount} вопросов.\nВаш диагноз: {result.Diagnosis}", "Сохранить результат", "Не сохранять", "Введите имя", 20, default, "");
+        
+        if (name != null)
+        {
+            result.Name = name;
+        }
+
         while (Navigation.NavigationStack.Count > 1)
         {
             Navigation.RemovePage(Navigation.NavigationStack[1]);
         }
 
         await dispatcher.DispatchAsync(() => Shell.Current.Navigation.PopToRootAsync(true));
-        //Shell.Current.GoToAsync(nameof(MainPage));
+
+        resultService.SaveResult(result);
     }
 }

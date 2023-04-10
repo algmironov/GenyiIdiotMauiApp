@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using GenyiIdiotMauiApp.DataBase;
 using GenyiIdiotMauiApp.Model;
 using GenyiIdiotMauiApp.View;
 
@@ -21,6 +22,9 @@ namespace GenyiIdiotMauiApp.Service
             return resultList;
         }
 
-        
+        public void SaveResult(Result result)
+        {
+           ResultStorage.AddResult(result);
+        }
     }
 }

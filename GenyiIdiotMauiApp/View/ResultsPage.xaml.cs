@@ -1,4 +1,5 @@
 using GenyiIdiotMauiApp.Model;
+using GenyiIdiotMauiApp.ViewModel;
 
 using Microsoft.Maui.Dispatching;
 
@@ -7,10 +8,11 @@ namespace GenyiIdiotMauiApp.View;
 public partial class ResultsPage : ContentPage
 {
     IDispatcher dispatcher;
-	public ResultsPage(IDispatcher dispatcherProvider)
+	public ResultsPage(IDispatcher dispatcherProvider, ResultViewModel viewModel)
 	{
         this.dispatcher = dispatcherProvider;
-		InitializeComponent();
+        BindingContext = viewModel;
+        InitializeComponent();
 	}
 
 

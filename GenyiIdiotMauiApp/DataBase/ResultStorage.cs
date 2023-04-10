@@ -13,8 +13,8 @@ namespace GenyiIdiotMauiApp.DataBase
             var options = new JsonSerializerOptions { WriteIndented = true };
             List<Result> resultList = GetListOfResults();
             resultList.Add(result);
-            var data = JsonSerializer.Serialize<List<Result>>(resultList, options);
-            _ = DataDealer.SaveData(filename, data);
+            var data = JsonSerializer.Serialize(resultList, options);
+            _ = DataDealer.SaveData(pathToResults, data);
         }
 
         public static List<Result> GetListOfResults()
