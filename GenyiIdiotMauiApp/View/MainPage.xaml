@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GenyiIdiotMauiApp.MainPage"
+             Title="Гений или Идиот" BackgroundImageSource="background.png">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="doctor_new.png"
+                HeightRequest="200"
+                HorizontalOptions="Center"/>
+            <Label
+                Text='"Гений или Идиот"'
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Добро пожаловать в игру "
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Проверь свои знания"
+                FontSize="20"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="NewGameBtn"
+                Text="Новая игра"
+                WidthRequest="200"
+                SemanticProperties.Hint="Starts new game"
+                Clicked="OnStartGamePressed"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="ResultsBtn"
+                Text="Таблица результатов"
+                WidthRequest="200"
+                SemanticProperties.Hint="Shows results Table"
+                Clicked="ShowResultsButton_Pressed"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="SettingsBtn"
+                Text="Настройки"
+                WidthRequest="200"
+                SemanticProperties.Hint="Opens settings menu"
+                Clicked="SettingsButton_Pressed"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="ExitBtn"
+                Text="Выход"
+                WidthRequest="200"
+                SemanticProperties.Hint="Closes the game"
+                Clicked="ExitButton_Pressed"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

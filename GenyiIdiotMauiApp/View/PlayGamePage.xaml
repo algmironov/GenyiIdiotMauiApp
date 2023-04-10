@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GenyiIdiotMauiApp.View.PlayGamePage"
+             Title="Гений или Идиот">
+
+    <VerticalStackLayout Spacing="10" Margin="10">
+
+        
+        <Label 
+            x:Name="questionLabel"
+            Text="Вопрос:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" Margin="0,15,0,0" />
+        <Label 
+            x:Name="questionTextLabel"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" Margin="0,15,0,0" 
+            MinimumWidthRequest="200"/>
+        <Label 
+            x:Name="enterAnswerTextLabel"
+            Text="Введите ответ:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" Margin="0,15,0,0" 
+            MinimumWidthRequest="200"/>
+        <Entry 
+            x:Name="answerField"
+            Placeholder="Введите ответ в виде числа"
+            PlaceholderColor="#D2CBCB"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" Keyboard="Numeric"
+            />
+
+        <Button
+            x:Name="sendAnswerButton"
+            Text="Ответить"
+            HorizontalOptions="Center"
+            WidthRequest="200"
+            Clicked="SendAnswer_Clicked" />
+
+
+    </VerticalStackLayout>
+
+</ContentPage>

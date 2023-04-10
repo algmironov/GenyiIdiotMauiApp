@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             x:Class="GenyiIdiotMauiApp.View.ResultsPage"
+             xmlns:model="clr-namespace:GenyiIdiotMauiApp.Model"
+             xmlns:viewmodel="clr-namespace:GenyiIdiotMauiApp.ViewModel"
+             x:DataType="viewmodel:ResultViewModel"
+             Title="Таблица результатов">
+
+    <Grid 
+        ColumnDefinitions="*,*"
+        ColumnSpacing="5"
+        RowDefinitions="*,Auto"
+        RowSpacing="0">
+        <RefreshView
+                Grid.ColumnSpan="2"
+                Command="{Binding GetResultsCommand}"
+                IsRefreshing="{Binding IsRefreshing}">
+            <ContentView>
+                <CollectionView
+                        ItemsSource="{Binding Results}"
+                        SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="100">
+                            <Image
+                                    HorizontalOptions="Center"
+                                    HeightRequest="160"
+                                    WidthRequest="160"
+                                    Source="nodata.png"
+                                    VerticalOptions="Center" />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Result">
+                            <Grid Padding="10" HorizontalOptions="Fill">
+                                <Frame HeightRequest="75" >
+                                    <Grid Padding="5" ColumnDefinitions="*,*">
+                                        <HorizontalStackLayout>
+                                            <Grid
+                                                ColumnSpacing="0"
+                                                HeightRequest="70">
+
+                                                <Grid.RowDefinitions>
+                                                <RowDefinition Height="60" />
+                                                </Grid.RowDefinitions>
+                                                
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="150" />
+                                                    <ColumnDefinition Width="150" />
+                                                    <ColumnDefinition Width="40" />
+                                                    <ColumnDefinition Width="40" />
+                                                    <ColumnDefinition Width="40" />
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="100" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Margin="5" Text="{Binding Name}" TextType="Text" VerticalOptions="Center" VerticalTextAlignment="Start" Visual="Default" />
+                                                <Label Grid.Column="1" Margin="5" Text="Правильных ответов: " TextType="Text" VerticalOptions="Center" VerticalTextAlignment="Start" Visual="Default" />
+                                                <Label Grid.Column="2" Margin="5" Text="{Binding CorrectAnswersCount }" TextType="Text" VerticalOptions="Center" VerticalTextAlignment="Start" Visual="Default" />
+                                                <Label Grid.Column="3" Margin="5" Text="из " TextType="Text" VerticalOptions="Center" VerticalTextAlignment="Start" Visual="Default" />
+                                                <Label Grid.Column="4" Margin="5" Text="{Binding QuestionsAsked}" TextType="Text" VerticalOptions="Center" VerticalTextAlignment="Start" Visual="Default" />
+                                                <Label Grid.Column="5" Margin="5" Text="Диагноз: " TextType="Text" VerticalOptions="Center" VerticalTextAlignment="Start" Visual="Default" />
+                                                <Label Grid.Column="6" Margin="5" Text="{Binding Diagnosis}" TextType="Text" VerticalOptions="Center" VerticalTextAlignment="Start" Visual="Default" />
+                                            </Grid>
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </RefreshView>
+
+        <Button 
+            x:Name="loadResults"
+            Text="Загрузить результаты"
+            Command="{Binding GetResultsCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="8"/>
+        
+        <Button 
+            x:Name="exitButton"
+            Text="Выйти"
+            Clicked="ExitButton_Clicked"
+            IsEnabled="{Binding IsNotBusy}"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="8"/>
+
+        <ActivityIndicator 
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"/>
+    </Grid>
+</ContentPage>

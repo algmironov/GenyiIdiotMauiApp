@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GenyiIdiotMauiApp.View.AddNewQuestionPage"
+             Title="Добавление нового вопроса">
+    <VerticalStackLayout>
+
+        <Label 
+            Margin="5"
+            Text="Введите текст вопроса:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Editor 
+            x:Name="questionInputTextEditor"
+            Margin="5"
+            Text=""
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            HorizontalTextAlignment="Start" 
+            AutoSize="TextChanges" 
+            Keyboard="Text" 
+            MinimumWidthRequest="300" 
+            Placeholder="Введите текст вопроса" 
+            PlaceholderColor="#B8AEAE" />
+
+        <Label 
+            Margin="5"
+            Text="Введите ответ:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Editor 
+            x:Name="questionInputAnswerEditor"
+            Margin="5"
+            Text=""
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            Keyboard="Numeric"
+            MinimumWidthRequest="50" 
+            Placeholder="Введите ответ" 
+            PlaceholderColor="#B8AEAE" />
+
+        <Button 
+            x:Name="saveQuestionButton"
+            HorizontalOptions="Center"
+            WidthRequest="150"
+            Margin="5"
+            Text="Сохранить" 
+            Clicked="SaveQuestionButton_Clicked"/>
+    </VerticalStackLayout>
+</ContentPage>
