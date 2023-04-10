@@ -26,7 +26,6 @@
 
         <Entry 
             x:Name="inGameQuestionsCount"
-            Text="10"
             HeightRequest="40"
             Placeholder="" 
             Grid.Column="1"
@@ -44,7 +43,6 @@
 
         <Entry 
             x:Name="inGameTimePerQuestion"
-            Text="10"
             HeightRequest="40"
             Placeholder="" 
             Grid.Column="1"

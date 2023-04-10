@@ -46,6 +46,7 @@ namespace GenyiIdiotMauiApp.Model
             var pathToQuestions = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), questions);
             var pathToResults = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), results);
             var pathToDiagnoses = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), diagnoses);
+            var pathToSettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "settings.json");
 
             using var qStream = FileSystem.OpenAppPackageFileAsync(questions).Result;
             using var qReader = new StreamReader(qStream);
@@ -70,6 +71,23 @@ namespace GenyiIdiotMauiApp.Model
             {
                 File.WriteAllText(pathToDiagnoses, originalDiagnoses);
             }
+
+            //var options = new JsonSerializerOptions { WriteIndented = true };
+            //var settings = JsonSerializer.Serialize(new GameSettings(), options);
+            //if (!File.Exists(pathToSettings))
+            //{
+            //    File.WriteAllText(pathToSettings, settings);
+            //}
+
+            if (!Preferences.ContainsKey("inGameQuestionsCountDefault"))
+            {
+                Preferences.Set("inGameQuestionsCountDefault", 10);
+            }
+            if (!Preferences.ContainsKey("timePerQuestionDefault"))
+            {
+                Preferences.Set("timePerQuestionDefault", 10);
+            }
+            
 
         }
             

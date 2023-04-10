@@ -9,15 +9,23 @@ namespace GenyiIdiotMauiApp.Service
 {
     public class QuestionService
     {
-        List<Question> questionList = new ();
-        string pathToQuestions = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "questions.json");
+        static List<Question> questionList = new ();
+        static readonly string pathToQuestions = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "questions.json");
 
-        public async Task<List<Question>> GetQuestions()
+        public static async Task<List<Question>> GetQuestions()
         {
-            StreamReader reader = new StreamReader(pathToQuestions, Encoding.UTF8);
+            StreamReader reader = new (pathToQuestions, Encoding.UTF8);
             var contents = await reader.ReadToEndAsync();
             questionList = JsonSerializer.Deserialize<List<Question>>(contents);
             return questionList;
+        }
+
+        public static async Task<int> GetQuestionsCount()
+        {
+            StreamReader reader = new (pathToQuestions, Encoding.UTF8);
+            var contents = await reader.ReadToEndAsync();
+            questionList = JsonSerializer.Deserialize<List<Question>>(contents);
+            return questionList.Count;
         }
 
         public static bool EditQuestion(Question oldQuestion, Question editedQuestion)

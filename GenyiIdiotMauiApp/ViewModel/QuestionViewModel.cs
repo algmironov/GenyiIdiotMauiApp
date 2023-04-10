@@ -7,15 +7,16 @@ namespace GenyiIdiotMauiApp.ViewModel
     public partial class QuestionViewModel : BaseViewModel
     {
         public ObservableCollection<Question> Questions { get; } = new();
+        //public bool IsRefreshing { get; private set; }
 
         readonly QuestionService questionService;
 
         [ObservableProperty]
         bool isRefreshing;
 
-        public QuestionViewModel(QuestionService questionService) 
+        public QuestionViewModel(QuestionService questionService) : base()
         {
-            Title = "Questions";
+            //Title = "Questions";
             this.questionService = questionService;
         }
 
@@ -28,7 +29,7 @@ namespace GenyiIdiotMauiApp.ViewModel
             try
             {
                 IsBusy = true;
-                var questions = await questionService.GetQuestions();
+                var questions = await QuestionService.GetQuestions();
 
                 if (Questions.Count != 0)
                 {
@@ -39,7 +40,7 @@ namespace GenyiIdiotMauiApp.ViewModel
                     Questions.Add(question);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get Questions: {ex.Message}");
                 await Shell.Current.DisplayAlert("Error with getting questions!", ex.Message, "Ok");
