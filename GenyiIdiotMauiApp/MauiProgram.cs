@@ -26,6 +26,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<QuestionViewModel>();
         builder.Services.AddSingleton<ResultsPage>();
         builder.Services.AddSingleton<ResultService>();
+		builder.Services.AddTransient<ResultViewModel>();
         builder.Services.AddSingleton<SettingsPage>();
         builder.Services.AddTransient<PlayGamePage>();
 		builder.Services.AddSingleton<ManageQuestionsPage>();
