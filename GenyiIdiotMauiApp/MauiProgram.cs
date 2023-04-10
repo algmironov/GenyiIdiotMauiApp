@@ -4,6 +4,7 @@ using GenyiIdiotMauiApp.ViewModel;
 
 using Microsoft.Extensions.Logging;
 using GenyiIdiotMauiApp.Model;
+using GenyiIdiotMauiApp.DataBase;
 
 namespace GenyiIdiotMauiApp;
 
@@ -20,8 +21,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 		builder.Services.AddSingleton<QuestionService>();
+		builder.Services.AddSingleton<DataDealer>();
+		builder.Services.AddSingleton<GameSettingsStorage>();
         builder.Services.AddSingleton<QuestionViewModel>();
         builder.Services.AddSingleton<ResultsPage>();
+        builder.Services.AddSingleton<ResultService>();
         builder.Services.AddSingleton<SettingsPage>();
         builder.Services.AddTransient<PlayGamePage>();
 		builder.Services.AddSingleton<ManageQuestionsPage>();

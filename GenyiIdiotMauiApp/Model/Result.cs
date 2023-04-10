@@ -5,13 +5,15 @@
     {
         public string Name { get; set; } = "Unknown";
         public int CorrectAnswersCount { get; set; } = 0;
+        public int QuestionsAsked { get; set; } = 0;
         public string Diagnosis { get; set; } = "Unknown";
 
-        public Result(string name, int answersCount, string diagnosis)
+        public Result(string name, int answersCount, int questionsAsked, string diagnosis)
         {
             Name = name;
             CorrectAnswersCount = answersCount;
             Diagnosis = diagnosis;
+            QuestionsAsked = questionsAsked;
         }
 
         public Result()
@@ -31,7 +33,7 @@
                 return false;
             Result other = obj as Result;
 
-            return Name.Equals(other.Name) && CorrectAnswersCount == other.CorrectAnswersCount && Diagnosis.Equals(other.Diagnosis);
+            return Name.Equals(other.Name) && CorrectAnswersCount == other.CorrectAnswersCount && QuestionsAsked == other.QuestionsAsked && Diagnosis.Equals(other.Diagnosis);
         }
 
         public bool Equals(Result other)
@@ -39,6 +41,7 @@
             return other is not null &&
                    Name == other.Name &&
                    CorrectAnswersCount == other.CorrectAnswersCount &&
+                   QuestionsAsked == other.QuestionsAsked &&
                    Diagnosis == other.Diagnosis;
         }
 

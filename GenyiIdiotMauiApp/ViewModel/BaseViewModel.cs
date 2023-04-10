@@ -12,9 +12,13 @@ namespace GenyiIdiotMauiApp.ViewModel
         [NotifyPropertyChangedFor(nameof(IsNotBusy))]
         bool isBusy;
 
+        //public bool IsBusy { get; set; }
+
         [ObservableProperty]
         string title;
 
         public bool IsNotBusy => !IsBusy;
+
+        
     }
 }

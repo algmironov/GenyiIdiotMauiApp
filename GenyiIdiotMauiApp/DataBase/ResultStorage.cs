@@ -42,7 +42,7 @@ namespace GenyiIdiotMauiApp.DataBase
                 
                 foreach (var res in resultsList)
                 {
-                    List<string> elem = new() { res.Name, res.CorrectAnswersCount.ToString(), res.Diagnosis };
+                    List<string> elem = new() { res.Name, res.CorrectAnswersCount.ToString(), res.QuestionsAsked.ToString(), res.Diagnosis };
                     results.Add(elem);
                 }
 

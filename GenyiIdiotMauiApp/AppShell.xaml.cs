@@ -13,5 +13,6 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ManageQuestionsPage), typeof(ManageQuestionsPage));
         Routing.RegisterRoute(nameof(QuestionEditPage), typeof(QuestionEditPage));
         Routing.RegisterRoute(nameof(AddNewQuestionPage), typeof(AddNewQuestionPage));
+        Routing.RegisterRoute(nameof(PlayGamePage), typeof(PlayGamePage));
     }
 }

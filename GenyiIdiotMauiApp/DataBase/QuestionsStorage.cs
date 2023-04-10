@@ -29,5 +29,12 @@ namespace GenyiIdiotMauiApp.DataBase
             questionsJson = JsonSerializer.Serialize(questionsList, options);
             _ = DataDealer.SaveData(pathToQuestions, questionsJson);
         }
+
+        public static List<Question> GetAllQuestions()
+        {
+            var questionsJson = DataDealer.GetDataFromJson(pathToQuestions).Result;
+            var questionsList = JsonSerializer.Deserialize<List<Question>>(questionsJson);
+            return questionsList;
+        }
     }
 }

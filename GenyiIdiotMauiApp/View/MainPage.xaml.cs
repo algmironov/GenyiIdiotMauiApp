@@ -18,14 +18,14 @@ public partial class MainPage : ContentPage
 		await Shell.Current.GoToAsync("SettingsPage");
 	}
 
-	private void OnStartGamePressed(object sender, EventArgs e)
+	private async void OnStartGamePressed(object sender, EventArgs e)
 	{
+        await Shell.Current.GoToAsync("PlayGamePage");
+    }
 
-	}
-
-	private void ShowResultsButton_Pressed(object sender, EventArgs e)
+	private async void ShowResultsButton_Pressed(object sender, EventArgs e)
 	{
-
-	}
+		await Shell.Current.GoToAsync("ResultsPage");
+    }
 }
 
